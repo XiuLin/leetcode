@@ -63,6 +63,12 @@ bool isMatch(string s, string p) {
                 continue;
             }
             if ( p[index_of_p] == '*') {
+                if (index_of_p == 0 ){
+                    break;
+                }
+                if (p[index_of_p -1] != s.at(stack_top_index_of_s)){
+                    break;
+                }
                 while (stack_top_index_of_s < s.size()){
                     char t = s.at(stack_top_index_of_s);
                     if (t != top){
