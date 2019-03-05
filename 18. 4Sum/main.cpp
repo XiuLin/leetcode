@@ -13,65 +13,60 @@ vector<vector<int>> fourSum(vector<int>& nums, int target) {
     if (nums.size() < 4) {
         return {};
     }
-
+    
     std::sort(nums.begin(),nums.begin()+nums.size());
-
-    for (int i = 0; i < nums.size(); ++i) {
-
+    
+    for (int i = 0; i < nums.size()-3; ++i) {
+        
         if (i >0 && nums[i] == nums[i-1]) continue;
-
-        int begin = i +1;
-        int end = nums.size()-1;
-        while (begin < end) {
-
-            while (begin < end && nums[begin] == nums[begin+1]) {
-                ++begin;
-            }
-            while (begin < end && nums[end] == nums[end-1]) {
-                --end;
-            }
-
-            int tmp = target - (nums[i]+nums[begin]+nums[end]);
-            if (tmp < nums[begin] ){
-                --end;
-                continue;
-            } else if (tmp > nums[end]) {
-                ++begin;
-                continue;
-            }
-            for (int j = begin+1; j < end; ++j) {
-                if (tmp == nums[j]) {
-                    ret.push_back({nums[i],nums[begin],nums[j],nums[end]});
-                    ++begin;
-                    --end;
-                    break;
+        
+        int tar = target - nums[i];
+        for (int k = i +1; k < nums.size()-2; ++k) {
+            
+            if (k >i+1 && nums[k] == nums[k-1]) continue;
+            
+            int begin = k +1;
+            int end = nums.size()-1;
+            while (begin < end) {
+                
+                if (begin < end && tar == nums[k]+nums[begin]+nums[end]) {
+                    ret.push_back({nums[i],nums[k],nums[begin],nums[end]});
+                    while (begin < end && begin > k +1 && nums[begin] == nums[begin-1]) {
+                        ++begin;
+                    }
+                    while (begin < end && nums[end] == nums[end-1]) {
+                        --end;
+                    }
+                    ++begin;--end;
                 }
-            }
-            if (begin + 1 >= end) {
-                break;
+                else if (begin < end && tar > nums[k]+nums[begin]+nums[end]) {
+                    ++begin;
+                }else if (begin < end && tar < nums[k]+nums[begin]+nums[end]) {
+                    --end;
+                }
             }
         }
     }
     return ret;
 }
 int main() {
-
-//    string s;
-//    string p;
-
+    
+    //    string s;
+    //    string p;
+    
     //string s = "acaabbaccbbacaabbbb";
     //string p = "a*.*b*.*a*aa*a*";
-
+    
     string s = "";
     string p = "*";
     //std::cin>>s>>p;
-
-
-    vector<int>num = {1, 0, -1, 0, -2, 2};
-    vector< vector<int> > ret = fourSum(num,0);
+    
+    
+    vector<int>num = {-1,2,2,-5,0,-1,4};
+    vector< vector<int> > ret = fourSum(num,3);
     int j =0;
     cout<<j<<endl;
-
+    
     return 0;
 }
 
