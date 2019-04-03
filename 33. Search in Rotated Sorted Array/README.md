@@ -15,6 +15,7 @@ new:{5,6,7,8,9,1,2,3,4}
 
 既然是递归，那么就要考虑好返回的情况。
 当这么几种情况需要返回最后的结果。
+
 case 1
 begin >= end && nums[begin] != target  --->  return -1
 
@@ -32,9 +33,8 @@ begin == mid && target != nums[end]  --->  -1
 
 
 OK 这几种返回结果考虑清楚后 我们就开始各种case的递归，不同的case区别就是传入的begin和end不同
-当
 
-nums[begin] > target && nums[mid] > target 和 nums[begin] < target && nums[mid] < target
+当nums[begin] > target && nums[mid] > target 和 nums[begin] < target && nums[mid] < target
 这两种情况下不光需要考虑一边的情况，即--mid to end--  or --begin to mid--如果一边返回-1那么另一半可能存在目标值。
 
 
